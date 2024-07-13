@@ -85,4 +85,107 @@ root.render(
      - inspect in browser too  and see the scripts added 
 
 
-## 01vitereact
+## 01basicreact vs 01vitereact
+
+- Go to _package.json_ see , there are no web scripts so how the React file is injected? Let's Analyse
+   - First: _index.html_ is in root folder i.e outside of public folder
+   - Open _index.html_ ; see they have directly loaded 
+   - Loaded like classical JS instead of that many scripts
+   ```html
+     <body style="background-color: rgb(5, 4, 45);">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+   ```
+- compare _main.jsx_ of vite and _index.js_ of basicreact 
+  - differnce is that  _main.jsx_ of vite  is not taking refernce to DOM ; rest working is same 
+
+
+### Make more like `<App/>` in **vite**
+
+- Let's work on **01vitereact** ;
+- run the app first `npm run dev`
+-$Protip💡$: .jsx extension is for  making components
+- Make a new file _chai.js_ in **src** folder and write
+```javascript
+function chai() {
+    return (
+        <h2>Chai</h2>
+    )
+}
+
+export default chai 
+``` 
+- and in _App.jsx_ write
+```javascript
+import chai from './chai.jsx'
+function App() {
+  return (
+    <chai/>
+  )
+}
+export default App
+```
+
+- Error encountered
+  -  Pre-transform error: Failed to parse source for import analysis because the content contains invalid JS syntax. If you are using JSX, make sure to name the file with the .jsx or .tsx extension.
+- How to resolve ; rename the _chai.js_ to _chai.jsx_
+  - Now no error but no output on page ;
+  - go to inspect->console
+  - react-dom.development.js:86  Warning: The tag `<chai>` is unrecognized in this browser. If you meant to render a React component, start its name with an uppercase letter.
+    at chai
+    at App
+  - These are Best Practices
+- After changes 
+ - _App.jsx_ 
+```javascript
+import Chai from './chai.jsx'
+function App() {
+  return (
+    <Chai/>
+  )
+}
+export default App
+``` 
+   - _chai.jsx_
+```javascript
+function Chai() {
+    return (
+        <h2>Chai is here</h2>
+    )
+}
+export default Chai 
+```
+
+- It will work fine now
+
+### Modifications in _App.jsx_
+- try writing this
+```javascript
+function App() {
+  return (
+    <Chai/>
+  )
+```
+- Error: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>? (5:4)
+  - It means ; we have to return only single element 
+  - Solution is wrapping all the components / elements in a `<div></div>` tag 
+  - Because this was a common issue so they introduced : fragment <>...</>
+- Now code will look like ; by these multiple elements are returned as a single component
+```javascript
+function App() {
+   return (
+    <>
+    <Chai/>
+    <h1>yo</h1>
+    <p>Tomato is Red</p>
+    </>
+  )
+  )
+```
+
+### Make more like `<App/>` in **Basic React**
+- Try the same things here , and observe the differnce 
+ - it also restricts the use of intial lowercase
+ - but it works with .js extension and .jsx both 
+$Protip💡$: Best Practices , the intials of file like _App.jsx_ or _Chai.jsx_ should be capital  

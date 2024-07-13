@@ -1,8 +1,13 @@
+import Chai from './chai.jsx'
 function App() {
-  
-
+  const username = "Tomato are still green"
   return (
-    <h1>Hello World</h1>
+    <>
+    <Chai/>
+    <h1>yo</h1>
+    <p>{username}</p>
+    <p>Tomato is Red</p>
+    </>
   )
 }
 
