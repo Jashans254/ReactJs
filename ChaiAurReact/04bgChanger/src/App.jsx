@@ -1,25 +1,3 @@
-# Building a react project | bgChanger
-
-
-## Let's Start
-- Make a vite app : project name - 04bgChanger ; React + JS
-   - `npm create vite@latest`
-   - `cd 04bgChanger`
-   - `npm i`
-- configure tailwind  as done in [prevlec](/lec7/readme.md)
-
-- As we are going to play with the UI , so usestate will be used
-- Go to src/App.jsx and clear the return part ; so that we can start our project
-
-- Code snippets
-  - `<button onClick={()=>setColor("red")} ` there are buttons ; clicking on them changes the background color 
-     - onclick takes a function as a paramater
-  - clicking button will change in `<div className="h-screen w-full duration-200" style={{backgroundColor:color}}>` 
-  - simply use of setColor() function to change the color from default "olive" to same as button color
-
-  
-
-```js
 import { useState } from "react"
 
 function App() {
@@ -48,4 +26,3 @@ function App() {
 }
 
 export default App
-```
